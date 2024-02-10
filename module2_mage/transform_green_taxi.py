@@ -4,7 +4,7 @@ if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
 
 
-@transformerhttp://localhost:6789/pipelines/green_taxi_etl2/edit?sideview=tree#
+@transformer
 def transform_green_taxi(data, *args, **kwargs):
     data.columns = data.columns.str.lower().str.replace(" ", "_")
     print(f'Preprocessing: rows with zero passengers : {data["passenger_count"].isin([0]).sum()}')

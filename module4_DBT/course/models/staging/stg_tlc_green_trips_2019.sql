@@ -9,6 +9,7 @@ source as (
 renamed as (
 
     select
+        {{ dbt_utils.default__generate_surrogate_key(['vendor_id','pickup_datetime']) }} as tripid, 
         vendor_id,
         pickup_datetime,
         dropoff_datetime,
@@ -25,6 +26,7 @@ renamed as (
         airport_fee,
         total_amount,
         payment_type,
+        coalesce({{ dbt.safe_cast("payment_type", api.Column.translate_type("integer")) }},0) as payment_type,
         distance_between_service,
         time_between_service,
         trip_type,

@@ -27,21 +27,19 @@ with
             cast(mta_tax as numeric) as mta_tax,
             cast(tip_amount as numeric) as tip_amount,
             cast(tolls_amount as numeric) as tolls_amount,
-            cast(ehail_fee as numeric) as ehail_fee,
             cast(imp_surcharge as numeric) as imp_surcharge,
             cast(total_amount as numeric) as total_amount,
             -- cast(payment_type as integer) as payment_type_test2, # Encountered an error: Runtime Error Database Error in sql_operation inline_query (from remote system.sql) Bad int64 value: 2.0
             -- cast(payment_type as numeric) as payment_type_test3, # works fine but display float in dbt
-            cast(replace(payment_type,'.0','') as integer) as payment_type_test,
+            cast(replace(payment_type,'.0','') as integer) as payment_type,
+            {{ get_payment_type_description('payment_type') }} as payment_type_description,
         from source
     )
 
 select *
 from renamed
 
-
-
--- dbt build --select <model_name> --vars '{'is_test_run': 'false'}'
+-- dbt build --select stg_tlc_green_trips_2019 --vars '{'is_test_run': 'false'}'
 {% if var('is_test_run', default=true) %}
 
   limit 100

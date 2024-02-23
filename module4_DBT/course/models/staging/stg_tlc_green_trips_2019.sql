@@ -26,6 +26,10 @@ renamed as (
         airport_fee,
         total_amount,
         payment_type,
+        -- coalesce({{ dbt.safe_cast("payment_type", api.Column.translate_type("integer")) }},0) as payment_type_test1, # from the course : Not working, runs fine but replace all values with 0
+        -- cast(payment_type as integer) as payment_type_test2, # Encountered an error: Runtime Error Database Error in sql_operation inline_query (from remote system.sql) Bad int64 value: 2.0
+        -- cast(payment_type as numeric) as payment_type_test3, # works fine but display float in dbt
+        cast(replace(payment_type,'.0','') as integer) as payment_type_test,
         distance_between_service,
         time_between_service,
         trip_type,

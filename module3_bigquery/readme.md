@@ -5,10 +5,10 @@ SELECT count(*) FROM `classe-zoomcamp.module3_homeworks.homeworks3_native`
 ## Question 2 
 
 SELECT count(distinct(PULocationID)) FROM `classe-zoomcamp.module3_homeworks.homeworks3_native` 
-# 6.41MB for native
+anwer : 6.41MB for native
 
 SELECT count(distinct(PULocationID)) FROM `classe-zoomcamp.module3_homeworks.homeworks3_external` 
-# 0 for the external data table
+answer :  0 for the external data table
 
 
 ## Question 3 
@@ -16,7 +16,7 @@ SELECT count(distinct(PULocationID)) FROM `classe-zoomcamp.module3_homeworks.hom
 SELECT count(fare_amount) FROM `classe-zoomcamp.module3_homeworks.homeworks3_native` WHERE fare_amount=0
 
 ##  Question 4 
-# Partition by lpep_pickup_datetime Cluster on PUlocationID
+solution :  Partition by lpep_pickup_datetime Cluster on PUlocationID
 
 
 ## Question 5 
@@ -31,11 +31,11 @@ SELECT * FROM `classe-zoomcamp.module3_homeworks.homeworks3_native`;
 
 SELECT count(distinct(PULocationID)) FROM `classe-zoomcamp.module3_homeworks.homeworks3_native_partitioned`
 where lpep_pickup_datetime between '2022-06-01' and '2022-06-30'
-#1.12MB
+solution : 1.12MB
 
 SELECT count(distinct(PULocationID)) FROM `classe-zoomcamp.module3_homeworks.homeworks3_native`
 where lpep_pickup_datetime between '2022-06-01' and '2022-06-30'
-#12.82MB
+solution : 12.82MB
 
 ## Question 7 
 It is not a best practice to always cluster you data in BQ

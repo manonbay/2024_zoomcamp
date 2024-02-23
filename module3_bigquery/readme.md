@@ -27,7 +27,8 @@ DATE(lpep_pickup_datetime)
 CLUSTER BY PUlocationID AS
 SELECT * FROM `classe-zoomcamp.module3_homeworks.homeworks3_native`;
 
-## Write a query to retrieve the distinct PULocationID between lpep_pickup_datetime 06/01/2022 and 06/30/2022 (inclusive)
+## Question 6 
+Write a query to retrieve the distinct PULocationID between lpep_pickup_datetime 06/01/2022 and 06/30/2022 (inclusive)
 
 SELECT count(distinct(PULocationID)) FROM `classe-zoomcamp.module3_homeworks.homeworks3_native_partitioned`
 where lpep_pickup_datetime between '2022-06-01' and '2022-06-30'

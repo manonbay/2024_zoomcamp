@@ -7,4 +7,7 @@ sources:
 
     tables:
       - name: tlc_yellow_trips_2019
+      - name: tlc_yellow_trips_2020
       - name: tlc_green_trips_2019
+      - name: tlc_green_trips_2020
+      - name: fhv2019

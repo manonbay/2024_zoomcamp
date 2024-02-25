@@ -46,7 +46,7 @@ select trips_unioned.tripid,
     trips_unioned.imp_surcharge, 
     trips_unioned.total_amount, 
     trips_unioned.payment_type, 
-    {{ get_payment_type_description('payment_type') }} as payment_type_description2,
+    {{ get_payment_type_description('payment_type') }} as payment_type_description,
 from trips_unioned
 inner join dim_zones as pickup_zone
 on trips_unioned.pickup_location_id = pickup_zone.locationid

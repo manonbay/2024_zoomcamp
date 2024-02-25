@@ -1,4 +1,4 @@
-{{config(materialized='view')}}
+{{config(materialized='table')}}
 
 with fhv_tripdata as (select *, 'fhv' as service_type
     from {{ ref('stg_fhv2019') }}
@@ -19,11 +19,11 @@ select
     pickup_zone.zone as pickup_zone, 
     dropoff_zone.borough as dropoff_borough, 
     dropoff_zone.zone as dropoff_zone,  
-    
+
 from fhv_tripdata inner join dim_zones as pickup_zone
 on fhv_tripdata.pickup_location_id = pickup_zone.locationid
 inner join dim_zones as dropoff_zone
 on fhv_tripdata.dropoff_location_id = dropoff_zone.locationid
 
--- dbt build --select fact_trips --vars '{'is_test_run': 'false'}'
+-- dbt build --select fhv_with_zones --vars '{'is_test_run': 'false'}'
 {% if var("is_test_run", default=true) %} limit 100 {% endif %}

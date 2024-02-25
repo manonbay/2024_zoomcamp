@@ -24,7 +24,7 @@ instead. If you have access to GCP, you don't need to do it for local Postgres -
 You'll need to have completed the ["Build the first dbt models"](https://www.youtube.com/watch?v=UVI30Vxzd6c) video. 
 - It's the same as running *dbt build*
 - It applies a _limit 100_ to all of our models
-X It applies a _limit 100_ only to our staging models
+- X It applies a _limit 100_ only to our staging models
 - Nothing
 
 ### Question 2: 

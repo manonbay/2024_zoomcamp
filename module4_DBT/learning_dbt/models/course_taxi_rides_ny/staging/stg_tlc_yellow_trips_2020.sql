@@ -1,16 +1,18 @@
-with
+with 
+source as (
 
-    source as (select * from {{ source("staging", "tlc_green_trips_2019") }}),
+    select * from {{ source('staging', 'tlc_yellow_trips_2020') }}),
 
     renamed as (
         select
             -- identifiers
-            {{ dbt_utils.generate_surrogate_key(['vendor_id ', 'pickup_datetime']) }} as tripid,
-            {{ dbt.safe_cast("vendor_id ", api.Column.translate_type("integer")) }} as vendor_id ,
-            cast(replace(rate_code,'.0','') as integer) as rate_code,
-            {{ dbt.safe_cast("pickup_location_id", api.Column.translate_type("integer")) }} as pickup_location_id,
-            {{ dbt.safe_cast("dropoff_location_id", api.Column.translate_type("integer")) }} as dropoff_location_id,
+            {{ dbt_utils.generate_surrogate_key(["vendor_id ", "pickup_datetime"]) }} as tripid,
+            {{ dbt.safe_cast("vendor_id ", api.Column.translate_type("integer")) }} as vendor_id,
+            safe_cast(replace(rate_code, '.0', '') as integer) as rate_code,
+            {{dbt.safe_cast("pickup_location_id", api.Column.translate_type("integer"))}} as pickup_location_id,
+            {{dbt.safe_cast("dropoff_location_id", api.Column.translate_type("integer"))}} as dropoff_location_id,
 
+            
             -- timestamps
             cast(pickup_datetime as timestamp) as pickup_datetime,
             cast(dropoff_datetime as timestamp) as dropoff_datetime,
@@ -19,7 +21,7 @@ with
             store_and_fwd_flag,
             {{ dbt.safe_cast("passenger_count", api.Column.translate_type("integer")) }} as passenger_count,
             cast(trip_distance as numeric) as trip_distance,
-            cast(replace(trip_type,'.0','') as integer) as trip_type,
+            1 as trip_type,
 
             -- payment info
             cast(fare_amount as numeric) as fare_amount,
@@ -39,9 +41,5 @@ with
 select *
 from renamed
 
--- dbt build --select stg_tlc_green_trips_2019 --vars '{'is_test_run': 'false'}'
-{% if var('is_test_run', default=true) %}
-
-  limit 100
-
-{% endif %}
+-- dbt build --select <model.sql> --vars '{'is_test_run': 'false'}'
+{% if var("is_test_run", default=true) %} limit 100 {% endif %}

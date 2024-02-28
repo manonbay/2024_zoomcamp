@@ -1,12 +1,7 @@
-with 
+with
+    source as (select * from {{ source("staging", "tlc_green_trips_2019") }}),
 
-source as (
-
-    select * from {{ source('staging', 'tlc_green_trips_2020') }}
-
-),
-
-renamed as (
+    renamed as (
         select
             -- identifiers
             {{ dbt_utils.generate_surrogate_key(['vendor_id ', 'pickup_datetime']) }} as tripid,
@@ -43,7 +38,7 @@ renamed as (
 select *
 from renamed
 
--- dbt build --select stg_tlc_green_trips_2020 --vars '{'is_test_run': 'false'}'
+-- dbt build --select stg_tlc_green_trips_2019 --vars '{'is_test_run': 'false'}'
 {% if var('is_test_run', default=true) %}
 
   limit 100

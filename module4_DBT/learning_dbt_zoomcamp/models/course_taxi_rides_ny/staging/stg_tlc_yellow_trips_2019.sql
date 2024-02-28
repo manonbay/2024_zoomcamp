@@ -1,5 +1,4 @@
 with
-
     source as (select * from {{ source("staging", "tlc_yellow_trips_2019") }}),
 
     renamed as (

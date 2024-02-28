@@ -11,3 +11,49 @@ sources:
       - name: tlc_green_trips_2019
       - name: tlc_green_trips_2020
       - name: fhv2019
+
+models:
+  - name: stg_tlc_green_trips_2019
+    description: ""
+    columns:
+
+      - name: tripid
+        data_type: string
+        description: ""
+        tests:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
+
+      - name: pickup_location_id
+        data_type: int64
+        description: ""
+        tests:
+          - relationships:
+              field: locationid
+              to: ref('taxi_zone_geom')
+              severity: warn 
+
+      - name: dropoff_location_id
+        data_type: int64
+        description: ""
+        tests:
+          - relationships:
+              field: locationid
+              to: ref('taxi_zone_geom')
+              severity: warn 
+
+
+      - name: payment_type
+        data_type: int64
+        description: ""
+        tests:
+          - accepted_values:
+              values: "{{ var('payment_type_values') }}"
+              severity: warn
+              quote: false
+              
+      - name: payment_type_description
+        data_type: string
+        description: ""

@@ -54,6 +54,3 @@ models:
               severity: warn
               quote: false
               
-      - name: payment_type_description
-        data_type: string
-        description: ""

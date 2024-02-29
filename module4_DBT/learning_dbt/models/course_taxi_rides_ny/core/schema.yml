@@ -10,7 +10,7 @@ models:
       - name: tripid
         data_type: string
         description: "unique identifier conformed by the combination of vendorid and pickyp time"
-        
+
   - name: dim_zones
     description: > 
       List of unique zones idefied by locationid. 

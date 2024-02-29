@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    database: classe-zoomcamp  
+    schema: jaffle_shop  
+    tables:
+      - name: raw_orders
+      - name: raw_customers
+
+models: 
+  - name: dim_customers
+

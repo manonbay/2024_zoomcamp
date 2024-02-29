@@ -45,10 +45,8 @@ models:
     core:
       +materialized: table
   jaffle_shop:
-    # Applies to all files under models/course_taxi_rides_ny/
-    staging:
-      +materialized: view
-    mart:
-      +materialized: view
-    core:
-      +materialized: table
+
+
+
+vars: 
+  payment_type_values: [1,2,3,4,5,6]
